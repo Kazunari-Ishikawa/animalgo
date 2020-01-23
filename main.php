@@ -106,9 +106,10 @@ if (!empty($_POST)) {
           <div class="command-container">
             <?php if($encountFlg) { ?>
               <form action="" method="post" class="main-form">
-                <input type="submit" name="ball" value="１を投げる" />
-                <input type="submit" name="ball" value="２を投げる" />
-                <input type="submit" name="ball" value="３を投げる" />
+                <input type="hidden" name="ball" value="ボール">
+                <input type="submit" name="1" value="１を投げる" />
+                <input type="submit" name="2" value="２を投げる" />
+                <input type="submit" name="3" value="３を投げる" />
               </form>
               <form action="" method="post" class="main-form">
                 <input type="submit" name="escape" value="逃げる" />
