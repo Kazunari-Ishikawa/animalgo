@@ -12,11 +12,14 @@ p {
 
 body {
   background: #e2c764;
+  width: 760px;
+  margin: 0 auto;
 }
 
+/* 初期画面 */
 #START .container {
   box-sizing: border-box;
-  background: rgba(206, 112, 74, 1);
+  background: rgba(206, 112, 74, 0.7);
   margin: 30px 0;
   padding: 30px;
   width: 34%;
@@ -32,17 +35,93 @@ body {
   margin: 30px;
   text-align: center;
 }
-
-input[type="submit"] {
-  background: rgba(206, 112, 74, 1);
+.start-form input[type="submit"] {
+  background: #f09d00;
   border: none;
   height: 40px;
   font-size: 14px;
   padding: 10px;
   margin: 0;
 }
-
-input[type="submit"]:hover {
-  background: #f09d00;
+.start-form input[type="submit"]:hover {
+  background: rgba(206, 112, 74, 1);
   cursor: pointer;
+}
+
+/* メイン画面 */
+.main-container {
+  width: 100%;
+}
+.img-container {
+  text-align: center;
+  background: #fff;
+}
+.img-container img {
+  width: 60%;
+}
+.sub-container {
+  margin: 20px 0;
+  overflow: hidden;
+}
+.sub-left {
+  float: left;
+  width: 45%;
+}
+.sub-right {
+  float: right;
+  width: 50%;
+}
+.comment-container {
+  padding: 20px;
+  border: 3px solid rgba(206, 112, 74, 1);
+  border-radius: 10px;
+}
+.command-container {
+  padding: 20px;
+  border: 3px solid rgba(206, 112, 74, 1);
+  border-radius: 10px;
+}
+.main-form {
+  overflow: hidden;
+  padding: 5px;
+}
+.main-form input[type="submit"] {
+  background: #f09d00;
+  width: 100px;
+  box-sizing: border-box;
+  border: none;
+  display: block;
+  float: left;
+  height: 40px;
+  font-size: 14px;
+  padding: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+.main-form input[type="submit"]:last-child {
+  margin-right: 0;
+}
+.main-form input[type="submit"]:hover {
+  background: rgba(206, 112, 74, 0.7);
+  cursor: pointer;
+}
+.status-container {
+  margin-top: 20px;
+  padding: 20px;
+  border: 3px solid rgba(206, 112, 74, 1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.status,
+.ball {
+  overflow: hidden;
+  text-align: center;
+}
+.status p {
+  float: left;
+  width: 40%;
+}
+.ball p {
+  float: left;
+  width: 30%;
 }
