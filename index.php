@@ -1,7 +1,7 @@
 <?php
 // 共通関数・クラス関数読み込み
 require('function.php');
-
+debug('POST:'.print_r($_POST,true));
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -19,7 +19,7 @@ require('function.php');
         <form action="main.php" method="POST" class="start-form">
           <input type="submit" name="start" value="ゲームスタート！" />
         </form>
-      </div id="START">
+      </div>
     </section>
   </body>
 </html>

@@ -3,7 +3,9 @@
 require('function.php');
 
 // インスタンス読み込み
-require('instance.php')
+require('instance.php');
+
+debug('POST:'.print_r($_POST,true));
 
 ?>
 <!DOCTYPE html>
