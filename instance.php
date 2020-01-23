@@ -11,8 +11,8 @@ $balls = array();
 $human = new Human('見習い', 500, 70, 0);
 
 // アニマル：名前、画像、抵抗力（MAX100）、反撃力、レア度、捕獲ポイント
-$animals[] = new Animal('キリン', 'img/kirin.png', 30, mt_rand(30, 50), 50, 50);
-$animals[] = new Animal('ライオン', 'img/raion.png', 80, mt_rand(80, 100), 100, 100);
+$animals[] = new Animal('キリン', 'img/kirin.png', 30, mt_rand(30, 50), 30, 50);
+$animals[] = new Animal('ライオン', 'img/raion.png', 80, mt_rand(80, 100), 10, 100);
 $animals[] = new Animal('シカ', 'img/shika.png', 50, mt_rand(30, 50), 30, 30);
 $animals[] = new Animal('ウマ', 'img/uma.png', 60, mt_rand(30, 50), 30, 30);
 

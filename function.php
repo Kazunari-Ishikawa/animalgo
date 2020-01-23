@@ -33,8 +33,8 @@ class Human {
   // プロパティ
   protected $name;
   protected $hp;
-  protected $luck;
-  protected $achieve;
+  protected $luck; //逃げる確率：MAX100
+  protected $achieve; //合計捕獲ポイント：基本は0
   // コンストラクタ
   public function __construct($name, $hp, $luck, $achieve) {
     $this->name = $name;
@@ -63,7 +63,20 @@ class Human {
     return $this->achieve;
   }
   // メソッド
-
+  // 逃げるメソッド
+  public function escape() {
+    if (rateCal($this->luck)) {
+      return true;
+    } else {
+      false;
+    }
+  }
+  // 捕獲ポイント計算メソッド
+  public function calPoint($animalObj) {
+    $currentAchieve = $this->getAchieve;
+    $currentAchieve += $animalObj->getPoint();
+    $this->setAchieve($currentAchieve);
+  }
 }
 
 // ボールクラス：ボールの情報を管理する
@@ -71,8 +84,8 @@ class Ball {
   // プロパティ
   protected $name;
   protected $img;
-  protected $catch;
-  protected $rare;
+  protected $catch; // 捕獲力：暫定MAX100
+  protected $rare; // レア度、出現率：MAX100
   // コンストラクタ
   public function __construct($name, $img, $catch, $rare) {
     $this->name = $name;
@@ -102,9 +115,9 @@ class Animal {
   // プロパティ
   protected $name;
   protected $img;
-  protected $resistance;
+  protected $resistance; //抵抗力：暫定MAX100
   protected $attack;
-  protected $rare;
+  protected $rare; // レア度、出現率：MAX100
   protected $point;
   // コンストラクタ
   public function __construct($name, $img, $resistance, $attack, $rare, $point) {
@@ -145,10 +158,12 @@ class Animal {
     $attackMin = $this->attack - 10;
     $attackMax = $this->attack + 10;
     $attackPoint = (int)mt_rand($attackMin, $attackMax);
-    $humanObj->setHp($humanObj->getHp()-$attackPoiint);
+    $humanObj->setHp($humanObj->getHp()-$attackPoint);
     // 履歴出力
-    $_SESSION['history'] .= $this->name.'から反撃を受けた！';
-    $_SESSION['history'] .= $attackPoiint.'のダメージ！';
+    debug($this->name.'から反撃を受けた！');
+    debug($attackPoint.'のダメージ！');
+    // $_SESSION['history'] .= $this->name.'から反撃を受けた！';
+    // $_SESSION['history'] .= $attackPoint.'のダメージ！';
   }
   // ボールへの抵抗判定メソッド
   public function resist($ballObj) {
@@ -167,8 +182,57 @@ class Animal {
 
 }
 
+// 履歴管理クラス
+class History {
+  public function set($str) {
+
+  }
+}
+
+
 // 主人公生成関数
 function createHuman() {
   global $human;
   $_SESSION['human'] = $human;
+}
+
+// 確率判定関数
+function rateCal($num) {
+  if ($num >= mt_rand(1, 100)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// イベント関数
+function event($eventFlg) {
+  if ($eventFlg) {
+    // 良いイベントか悪いイベントか判定
+    if (rateCal((int)60)) {
+      $goodEventFlg = true;
+    } else {
+      $goodEventFlg = false;
+    }
+    // ボールイベントか体力イベントか判定
+    if (rateCal((int)20)) {
+      $ballEventFlg = true;
+    } else {
+      $ballEventFlg = false;
+    }
+
+    if ($goodEventFlg && $ballEventFlg) {
+      // 良いボールイベント発生
+      debug('良いボールイベント発生');
+    } elseif (!$goodEventFlg && $ballEventFlg) {
+      // 悪いボールイベント発生
+      debug('悪いボールイベント発生');
+    } elseif ($goodEventFlg && !$ballEventFlg) {
+      // 良い体力イベント発生
+      debug('良い体力イベント発生');
+    } elseif (!$goodEventFlg && !$ballEventFlg) {
+      // 悪い体力イベント発生
+      debug('悪い体力イベント発生');
+    }
+  }
 }
