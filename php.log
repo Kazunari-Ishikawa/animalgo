@@ -1,0 +1,272 @@
+[23-Jan-2020 22:48:23 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:48:28 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:48:28 Asia/Tokyo] 逃げる成功！
+[23-Jan-2020 22:48:30 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:48:32 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:48:32 Asia/Tokyo] 逃げる成功！
+[23-Jan-2020 22:48:33 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:48:33 Asia/Tokyo] 悪い体力イベント発生
+[23-Jan-2020 22:48:34 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:48:36 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:48:36 Asia/Tokyo] 逃げる成功！
+[23-Jan-2020 22:48:38 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:48:38 Asia/Tokyo] 良い体力イベント発生
+[23-Jan-2020 22:48:39 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:48:40 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:48:40 Asia/Tokyo] 逃げる成功！
+[23-Jan-2020 22:48:43 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:48:44 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:48:44 Asia/Tokyo] 逃げる成功！
+[23-Jan-2020 22:48:45 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:48:46 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:48:46 Asia/Tokyo] 逃げる失敗！
+[23-Jan-2020 22:48:46 Asia/Tokyo] ウマから反撃を受けた！
+[23-Jan-2020 22:48:46 Asia/Tokyo] 41のダメージ！
+[23-Jan-2020 22:48:51 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:48:52 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:48:52 Asia/Tokyo] 逃げる成功！
+[23-Jan-2020 22:48:53 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:48:54 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:48:54 Asia/Tokyo] 逃げる失敗！
+[23-Jan-2020 22:48:54 Asia/Tokyo] ライオンから反撃を受けた！
+[23-Jan-2020 22:48:54 Asia/Tokyo] 88のダメージ！
+[23-Jan-2020 22:48:57 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:48:58 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:48:58 Asia/Tokyo] 逃げる失敗！
+[23-Jan-2020 22:48:58 Asia/Tokyo] キリンから反撃を受けた！
+[23-Jan-2020 22:48:58 Asia/Tokyo] 44のダメージ！
+[23-Jan-2020 22:49:00 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:49:01 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:49:01 Asia/Tokyo] 逃げる成功！
+[23-Jan-2020 22:49:02 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:49:02 Asia/Tokyo] 良い体力イベント発生
+[23-Jan-2020 22:49:03 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:49:03 Asia/Tokyo] 悪い体力イベント発生
+[23-Jan-2020 22:49:04 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:49:05 Asia/Tokyo] POST:Array
+(
+    [ball] => １を投げる
+)
+
+[23-Jan-2020 22:49:08 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:49:08 Asia/Tokyo] 逃げる成功！
+[23-Jan-2020 22:49:09 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:49:10 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:49:10 Asia/Tokyo] 逃げる成功！
+[23-Jan-2020 22:49:11 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:49:12 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:49:12 Asia/Tokyo] 逃げる成功！
+[23-Jan-2020 22:49:15 Asia/Tokyo] POST:Array
+(
+    [gameover] => リタイア
+)
+
+[23-Jan-2020 22:49:15 Asia/Tokyo] POST:Array
+(
+)
+
+[23-Jan-2020 22:49:16 Asia/Tokyo] POST:Array
+(
+    [start] => ゲームスタート！
+)
+
+[23-Jan-2020 22:49:18 Asia/Tokyo] POST:Array
+(
+    [gameover] => リタイア
+)
+
+[23-Jan-2020 22:49:18 Asia/Tokyo] POST:Array
+(
+)
+
+[23-Jan-2020 22:50:18 Asia/Tokyo] POST:Array
+(
+    [start] => ゲームスタート！
+)
+
+[23-Jan-2020 22:50:20 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:50:21 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:50:21 Asia/Tokyo] 逃げる成功！
+[23-Jan-2020 22:50:22 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:50:23 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:50:23 Asia/Tokyo] 逃げる失敗！
+[23-Jan-2020 22:50:23 Asia/Tokyo] ウマから反撃を受けた！
+[23-Jan-2020 22:50:23 Asia/Tokyo] 38のダメージ！
+[23-Jan-2020 22:50:24 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:50:24 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:50:24 Asia/Tokyo] 逃げる成功！
+[23-Jan-2020 22:50:25 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:50:26 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:50:26 Asia/Tokyo] 逃げる成功！
+[23-Jan-2020 22:50:27 Asia/Tokyo] POST:Array
+(
+    [next] => 進む
+)
+
+[23-Jan-2020 22:50:27 Asia/Tokyo] POST:Array
+(
+    [escape] => 逃げる
+)
+
+[23-Jan-2020 22:50:27 Asia/Tokyo] 逃げる成功！
+[23-Jan-2020 22:50:29 Asia/Tokyo] POST:Array
+(
+    [gameover] => リタイア
+)
+
+[23-Jan-2020 22:50:29 Asia/Tokyo] POST:Array
+(
+)
+

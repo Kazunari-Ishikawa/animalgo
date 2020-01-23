@@ -1,0 +1,156 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: #e2c764;
+  width: 760px;
+  margin: 0 auto;
+}
+
+/* 初期画面 */
+#START .container {
+  box-sizing: border-box;
+  background: rgba(206, 112, 74, 0.7);
+  margin: 30px 0;
+  padding: 30px;
+  width: 34%;
+  position: absolute;
+  top: 25%;
+  left: 33%;
+  border-radius: 30px;
+}
+#START h1 {
+  text-align: center;
+}
+.start-form {
+  margin: 30px;
+  text-align: center;
+}
+.start-form input[type="submit"] {
+  background: #f09d00;
+  border: none;
+  height: 40px;
+  font-size: 14px;
+  padding: 10px;
+  margin: 0;
+}
+.start-form input[type="submit"]:hover {
+  background: rgba(206, 112, 74, 1);
+  cursor: pointer;
+}
+
+/* メイン画面 */
+.main-container {
+  width: 100%;
+}
+.img-container {
+  text-align: center;
+  background: #fff;
+}
+.img-container img {
+  width: 60%;
+}
+.sub-container {
+  margin: 20px 0;
+  overflow: hidden;
+}
+.sub-left {
+  float: left;
+  width: 45%;
+}
+.sub-right {
+  float: right;
+  width: 50%;
+}
+.comment-container {
+  padding: 20px;
+  border: 3px solid rgba(206, 112, 74, 1);
+  border-radius: 10px;
+}
+.command-container {
+  padding: 20px;
+  border: 3px solid rgba(206, 112, 74, 1);
+  border-radius: 10px;
+}
+.main-form {
+  overflow: hidden;
+  padding: 5px;
+}
+.main-form input[type="submit"] {
+  background: #f09d00;
+  width: 100px;
+  box-sizing: border-box;
+  border: none;
+  display: block;
+  float: left;
+  height: 40px;
+  font-size: 14px;
+  padding: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+.main-form input[type="submit"]:last-child {
+  margin-right: 0;
+}
+.main-form input[type="submit"]:hover {
+  background: rgba(206, 112, 74, 0.7);
+  cursor: pointer;
+}
+.status-container {
+  margin-top: 20px;
+  padding: 20px;
+  border: 3px solid rgba(206, 112, 74, 1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.status,
+.ball {
+  overflow: hidden;
+  text-align: center;
+}
+.status p {
+  float: left;
+  width: 40%;
+}
+.ball p {
+  float: left;
+  width: 30%;
+}
+
+/* 結果画面 */
+.point-container {
+  margin-top: 50px;
+  text-align: center;
+}
+.point-container h2 {
+  margin-bottom: 30px;
+}
+.point-container p {
+  margin-bottom: 30px;
+}
+.point {
+  font-size: 48px;
+  font-weight: 600;
+  margin-right: 10px;
+}
+.point-bottom-container {
+  margin: 20px 0;
+  overflow: hidden;
+}
+.card {
+  float: left;
+  width: 20%;
+  margin: 10px;
+}
+.card img {
+  width: 100%;
+}
