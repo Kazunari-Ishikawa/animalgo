@@ -36,8 +36,25 @@ function init($name) {
 //================================
 // ゲームオーバー
 //================================
-function gameOver() {
-  $_SESSION = array();
+function gameOver($humanObj) {
+  $gameOverFlg = false;
+  // 体力値の判定
+  if ($humanObj->getHp() <= 0) {
+    History::set('体力がなくなり力尽きた・・・');
+    $_SESSION['gameover'] = $humanObj->getName().'は体力がなくなり力尽きた・・・';
+    $gameOverFlg = true;
+  }
+  // ボール数の判定
+  if (($humanObj->getNumBasic() <= 0) && ($humanObj->getNumRare() <= 0) && ($humanObj->getNumSuperRare() <= 0) ) {
+    History::set('ボールが無くなったので帰るしかない・・・');
+    $_SESSION['gameover'] = 'ボールが無くなったので帰るしかない・・・';
+    $gameOverFlg = true;
+  }
+
+  if ($gameOverFlg) {
+    header("Location:result.php");
+    exit();
+  }
 }
 
 //================================

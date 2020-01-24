@@ -79,11 +79,13 @@ if (!empty($_POST)) {
 
     // リタイアを押した場合
     } elseif ($gameoverFlg) {
-      // ゲームオーバーとして遷移する
-      // gameOver();
+      // 結果画面へ遷移
+      $_SESSION['gameover'] = $_SESSION['human']->getName().'はあきらめて帰った';
       header("Location:result.php");
       exit();
     }
+    // ゲームオーバー判定（体力もしくはボールが０ならばゲームオーバー）
+    gameOver($_SESSION['human']);
   }
 }
 debug('SESSION:'.print_r($_SESSION, true));

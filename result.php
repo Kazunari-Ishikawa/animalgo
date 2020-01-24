@@ -11,9 +11,11 @@ session_start();
 debug('SESSION:'.print_r($_SESSION, true));
 
 // 捕獲ポイントを格納
-$point = (!empty($_SESSION)) ? $_SESSION['point'] : 0;
+$point = (!empty($_SESSION['point'])) ? $_SESSION['point'] : 0;
 // 捕獲したアニマルを格納
-$catch = (!empty($_SESSION)) ? $_SESSION['achieve'] : array();
+$catch = (!empty($_SESSION['achieve'])) ? $_SESSION['achieve'] : array();
+// ゲームオーバーコメントを格納
+$comment = (!empty($_SESSION['gameover'])) ? $_SESSION['gameover'] : '';
 
 // それぞれの数を数える
 $getAnimal = array();
@@ -43,7 +45,7 @@ for ($i = 0; $i < count($catch); $i++) {
 }
 
 // ゲーム終了としてセッションを削除
-gameOver();
+session_destroy();
 
 ?>
 
@@ -59,6 +61,7 @@ gameOver();
   <body>
     <section id="RESULT">
       <div class="point-container">
+        <p><?php echo $comment; ?></p>
         <h2>あなたの捕獲ポイントは</h2>
         <p><span class="point"><?php echo $point; ?></span>点です！</p>
         <div class="btn">
