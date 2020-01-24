@@ -148,7 +148,7 @@ debug('SESSION:'.print_r($_SESSION, true));
                 <input type="submit" name="gameover" value="リタイア" />
               </form>
             <?php } ?>
- 
+
           </div>
           <div class="status-container">
             <div class="status">
