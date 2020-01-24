@@ -7,16 +7,14 @@ class Human {
   protected $name;
   protected $hp;
   protected $luck; //逃げる確率：MAX100
-  protected $achieve; //合計捕獲ポイント：基本は0
   protected $numBasic; //ベーシックボールの保有数
   protected $numRare; //レアボールの保有数
   protected $numSuperRare; //スーパーレアボールの保有数
   // コンストラクタ
-  public function __construct($name, $hp, $luck, $achieve, $numBasic, $numRare, $numSuperRare) {
+  public function __construct($name, $hp, $luck, $numBasic, $numRare, $numSuperRare) {
     $this->name = $name;
     $this->hp = $hp;
     $this->luck = $luck;
-    $this->achieve = $achieve;
     $this->numBasic = $numBasic;
     $this->numRare = $numRare;
     $this->numSuperRare = $numSuperRare;
@@ -29,9 +27,6 @@ class Human {
   }
   public function setHp($num) {
     $this->hp = $num;
-  }
-  public function setAchieve($num) {
-    $this->achieve = $num;
   }
   public function setNumBasic($num) {
     $this->$numBasic = $num;
@@ -52,9 +47,6 @@ class Human {
   public function getLuck() {
     return $this->luck;
   }
-  public function getAchieve() {
-    return $this->achieve;
-  }
   public function getNumBasic() {
     return $this->numBasic;
   }
@@ -68,16 +60,12 @@ class Human {
   // 逃げるメソッド
   public function escape() {
     if (rateCal($this->luck)) {
+      History::set($this->name.'は逃げる成功！');
       return true;
     } else {
-      false;
+      History::set($this->name.'は逃げる失敗！');
+      return false;
     }
-  }
-  // 捕獲ポイント計算メソッド
-  public function calPoint($animalObj) {
-    $currentAchieve = $this->getAchieve;
-    $currentAchieve += $animalObj->getPoint();
-    $this->setAchieve($currentAchieve);
   }
   // ボール保有数変更
   public function changeBallNum($ball, $num) {
@@ -146,10 +134,8 @@ class Animal {
     $attackMax = $this->attack + 10;
     $attackPoint = (int)mt_rand($attackMin, $attackMax);
     $humanObj->setHp($humanObj->getHp()-$attackPoint);
-    debug($this->name.'から反撃を受けた！');
-    debug($attackPoint.'のダメージ！');
-    $_SESSION['history'] .= $this->name.'から反撃を受けた！';
-    $_SESSION['history'] .= $attackPoint.'のダメージ！';
+    History::set($this->name.'から反撃を受けた！');
+    History::set($attackPoint.'のダメージ！');
   }
   // ボールへの抵抗判定メソッド
   public function resist($ballObj) {
@@ -160,10 +146,10 @@ class Animal {
 
     // 判定・・・さらに複雑にするかは保留
     if ($catchPoint >= $resistPoint) {
-      $_SESSION['history'] .= $this->name.'の捕獲成功！';
+      History::set($this->name.'の捕獲成功！');
       return true;
     } else {
-      $_SESSION['history'] .= $this->name.'の捕獲失敗…';
+      History::set($this->name.'の捕獲失敗…');
       return false;
     }
   }
@@ -214,5 +200,13 @@ class History {
   }
   public static function clear() {
     $_SESSION = array();
+  }
+  public static function achieve($animalObj) {
+    if (empty($_SESSION['point'])) {
+      // $_SESSION['achieve'] = '';
+      $_SESSION['point'] = 0;
+    }
+    // $_SESSION['achieve'][0] = $animalObj->getName();
+    $_SESSION['point'] += $animalObj->getPoint();
   }
 }

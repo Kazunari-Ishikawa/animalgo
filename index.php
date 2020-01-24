@@ -47,15 +47,14 @@ if (!empty($_POST)) {
         $_SESSION['encountFlg'] = true;
         // レア度を設定したが、どのようにレア別に出現させるか
         $_SESSION['animal'] = $animals[mt_rand(0,3)];
+        History::set($_SESSION['animal']->getName().'が現れた！');
       }
 
     // 逃げるを押した場合
     }elseif ($escapeFlg) {
       if (!$_SESSION['human']->escape()) {
-        $_SESSION['history'] .= $_SESSION['human']->getName().'は逃げる失敗！';
         $_SESSION['animal']->attack($_SESSION['human']);
       } else {
-        $_SESSION['history'] .= $_SESSION['human']->getName().'は逃げる成功！';
         // 逃げる成功時、エンカウントフラグOFF
         $_SESSION['encountFlg'] = false;
       }
@@ -75,6 +74,8 @@ if (!empty($_POST)) {
         $_SESSION['animal']->attack($_SESSION['human']);
       } else {
         // 捕獲成功時、エンカウントフラグOFF
+        History::achieve($_SESSION['animal']);
+        $_SESSION['animal'] = '';
         $_SESSION['encountFlg'] = false;
       };
 
@@ -87,7 +88,7 @@ if (!empty($_POST)) {
     }
   }
 }
-
+debug('SESSION:'.print_r($_SESSION, true));
 ?>
 <!DOCTYPE html>
 <html lang="ja">
