@@ -59,13 +59,19 @@ if (!empty($_POST)) {
     // ボールを投げた場合
     } elseif ($ballFlg) {
       // 選択したボール種別の判定
-      if (!empty($_POST['type1'])) {
+      if (!empty($_POST['type0'])) {
         $selectBall = $balls[0];
-      } elseif (!empty($_POST['type2'])) {
+        $type = Ball::BASIC;
+      } elseif (!empty($_POST['type1'])) {
         $selectBall = $balls[1];
-      } elseif (!empty($_POST['type3'])) {
+        $type = Ball::RARE;
+      } elseif (!empty($_POST['type2'])) {
         $selectBall = $balls[2];
+        $type = Ball::SUPERRARE;
       }
+      // ボール消費
+      $_SESSION['human']->changeBallNum($type, -1);
+
       // 捕獲判定
       if (!$_SESSION['animal']->resist($selectBall)) {
         // 捕獲失敗時、アニマルが反撃する
@@ -135,9 +141,15 @@ debug('SESSION:'.print_r($_SESSION, true));
             <?php if($_SESSION['encountFlg']) { ?>
               <form action="" method="post" class="main-form">
                 <input type="hidden" name="ball" value="ボール">
-                <input type="submit" name="type1" value="ベーシックボール" />
-                <input type="submit" name="type2" value="レアボール" />
-                <input type="submit" name="type3" value="スーパーレアボール" />
+                <?php if ($_SESSION['human']->getNumBasic() > 0): ?>
+                  <input type="submit" name="type0" value="ベーシックボール" />
+                <?php endif; ?>
+                <?php if ($_SESSION['human']->getNumRare() > 0): ?>
+                  <input type="submit" name="type1" value="レアボール" />
+                <?php endif; ?>
+                <?php if ($_SESSION['human']->getNumSuperRare() > 0): ?>
+                  <input type="submit" name="type2" value="スーパーレアボール" />
+                <?php endif; ?>
               </form>
               <form action="" method="post" class="main-form">
                 <input type="submit" name="escape" value="逃げる" />
@@ -158,9 +170,9 @@ debug('SESSION:'.print_r($_SESSION, true));
               <p>残り体力：<?php echo $_SESSION['human']->getHp(); ?></p>
             </div>
             <div class="ball">
-              <p>ボール１</p>
-              <p>ボール２</p>
-              <p>ボール３</p>
+              <p>ベーシック×<?php echo $_SESSION['human']->getNumBasic(); ?></p>
+              <p>レア×<?php echo $_SESSION['human']->getNumRare(); ?></p>
+              <p>スーパーレア×<?php echo $_SESSION['human']->getNumSuperRare(); ?></p>
             </div>
           </div>
         </div>
