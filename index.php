@@ -8,9 +8,6 @@ require('instance.php');
 // セッションスタート
 session_start();
 
-// エンカウントフラグ（フラグ状態で、表示コマンドが変わる）
-// $_SESSION['encountFlg'] = false;
-
 // ポスト送信がある場合
 if (!empty($_POST)) {
 
@@ -71,6 +68,7 @@ if (!empty($_POST)) {
       }
       // 捕獲判定
       if (!$_SESSION['animal']->resist($selectBall)) {
+        // 捕獲失敗時、アニマルが反撃する
         $_SESSION['animal']->attack($_SESSION['human']);
       } else {
         // 捕獲成功時、エンカウントフラグOFF
