@@ -159,11 +159,10 @@ class Animal {
     $attackMax = $this->attack + 10;
     $attackPoint = (int)mt_rand($attackMin, $attackMax);
     $humanObj->setHp($humanObj->getHp()-$attackPoint);
-    // 履歴出力
     debug($this->name.'から反撃を受けた！');
     debug($attackPoint.'のダメージ！');
-    // $_SESSION['history'] .= $this->name.'から反撃を受けた！';
-    // $_SESSION['history'] .= $attackPoint.'のダメージ！';
+    $_SESSION['history'] .= $this->name.'から反撃を受けた！';
+    $_SESSION['history'] .= $attackPoint.'のダメージ！';
   }
   // ボールへの抵抗判定メソッド
   public function resist($ballObj) {
@@ -172,7 +171,7 @@ class Animal {
     // アニマルの抵抗力計算
     $resistPoint = $this->getResistance();
 
-    // 判定・・・さらに複雑なことにするかは保留
+    // 判定・・・さらに複雑にするかは保留
     if ($catchPoint >= $resistPoint) {
       $_SESSION['history'] .= $this->name.'の捕獲成功！';
     } else {
@@ -184,9 +183,27 @@ class Animal {
 
 // 履歴管理クラス
 class History {
-  public function set($str) {
-
+  public static function set($str) {
+    if (empty($_SESSION['history'])) $_SESSION['history'] = '';
+    $_SESSION['history'] .= $str.'<br>';
   }
+  public static function clear() {
+    unset($_SESSION);
+    $_SESSION = array();
+  }
+}
+
+// 初期化
+function init() {
+  History::clear();
+  History::set('ゲームスタート！');
+  createHuman();
+}
+
+// ゲームオーバー
+function gameOver() {
+  session_destroy();
+  $_SESSION = array();
 }
 
 
@@ -209,13 +226,13 @@ function rateCal($num) {
 function event($eventFlg) {
   if ($eventFlg) {
     // 良いイベントか悪いイベントか判定
-    if (rateCal((int)60)) {
+    if (rateCal(60)) {
       $goodEventFlg = true;
     } else {
       $goodEventFlg = false;
     }
     // ボールイベントか体力イベントか判定
-    if (rateCal((int)20)) {
+    if (rateCal(20)) {
       $ballEventFlg = true;
     } else {
       $ballEventFlg = false;

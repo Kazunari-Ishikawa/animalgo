@@ -5,10 +5,11 @@ require('function.php');
 require('instance.php');
 
 $encountFlg = false;
+debug('SESSION:'.print_r($_SESSION, true));
 
 // ポスト送信がある場合
 if (!empty($_POST)) {
-  debug('POST:'.print_r($_POST,true));
+  // debug('POST:'.print_r($_POST,true));
 
   // ゲーム開始フラグ
   $startFlg = (!empty($_POST['start'])) ? true : false;
@@ -24,8 +25,7 @@ if (!empty($_POST)) {
   // ゲーム開始時
   if ($startFlg) {
     // 初期化処理
-    $_SESSION = array();
-    createHuman();
+    init();
 
   } else {
     // ゲーム進行中
@@ -49,9 +49,11 @@ if (!empty($_POST)) {
     }elseif ($escapeFlg) {
       if (!$_SESSION['human']->escape()) {
         debug('逃げる失敗！');
+        $_SESSION['history'] .= $_SESSION['human']->getName().'は逃げる失敗！';
         $_SESSION['animal']->attack($_SESSION['human']);
       } else {
         debug('逃げる成功！');
+        $_SESSION['history'] .= $_SESSION['human']->getName().'は逃げる成功！';
       }
 
       // ボールを投げた場合
@@ -63,6 +65,7 @@ if (!empty($_POST)) {
       // リタイアを押した場合
     } elseif ($gameoverFlg) {
       // ゲームオーバーとして遷移する
+      gameOver();
       header("Location:index.php");
       exit();
     }
@@ -84,7 +87,7 @@ if (!empty($_POST)) {
       <div class="main-container">
         <?php if($encountFlg){ ?>
           <div class="img-container">
-            <img src="<?php echo $_SESSION['animal']->getImg(); ?>" alt="アニマル画像" />
+            <img src="img/<?php echo $_SESSION['animal']->getImg(); ?>" alt="アニマル画像" />
           </div>
         <?php } else { ?>
           <div class="img-container">
@@ -95,11 +98,12 @@ if (!empty($_POST)) {
       <div class="sub-container">
         <div class="sub-left">
           <div class="comment-container">
-            <p>〇〇はキリンに遭遇した！</p>
+            <?php if (!empty($_SESSION['history'])) echo $_SESSION['history']; ?>
+            <!-- <p>〇〇はキリンに遭遇した！</p>
             <p>〇〇はボールを投げた！</p>
             <p>捕まえられなかった！</p>
             <p>キリンの反撃！</p>
-            <p>〇〇は〇〇のダメージを受けた！</p>
+            <p>〇〇は〇〇のダメージを受けた！</p> -->
           </div>
         </div>
         <div class="sub-right">
@@ -113,6 +117,7 @@ if (!empty($_POST)) {
               </form>
               <form action="" method="post" class="main-form">
                 <input type="submit" name="escape" value="逃げる" />
+                <input type="submit" name="gameover" value="リタイア" />
               </form>
             <?php } else { ?>
               <form action="" method="post" class="main-form">
