@@ -177,9 +177,9 @@ class Ball {
   protected $catch; // 捕獲力：暫定MAX100
   protected $rare; // レア度、出現率：MAX100
   // 種別定数
-  const BASIC = 1;
-  const RARE = 2;
-  const SUPERRARE = 3;
+  const BASIC = 0;
+  const RARE = 1;
+  const SUPERRARE = 2;
   // コンストラクタ
   public function __construct($name, $img, $catch, $rare) {
     $this->name = $name;

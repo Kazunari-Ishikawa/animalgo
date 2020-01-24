@@ -8,12 +8,11 @@ require('instance.php');
 // セッションスタート
 session_start();
 
+// エンカウントフラグ（フラグ状態で、コマンドが変わる）
 $encountFlg = false;
-debug('SESSION:'.print_r($_SESSION, true));
 
 // ポスト送信がある場合
 if (!empty($_POST)) {
-  debug('POST:'.print_r($_POST,true));
 
   // ゲーム開始フラグ
   $startFlg = (!empty($_POST['start'])) ? true : false;
@@ -58,12 +57,14 @@ if (!empty($_POST)) {
         $_SESSION['animal']->attack($_SESSION['human']);
       } else {
         $_SESSION['history'] .= $_SESSION['human']->getName().'は逃げる成功！';
+
       }
 
     // ボールを投げた場合
     } elseif ($ballFlg) {
       $encountFlg = true;
-
+      // 捕獲判定
+      
       // 捕獲成功時にはエンカウントフラグをOFFにしなければならない
 
     // リタイアを押した場合
