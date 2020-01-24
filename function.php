@@ -64,13 +64,13 @@ function rateCal($num) {
 //================================
 function event() {
   // 良いイベントか悪いイベントか判定:暫定60%
-  if (rateCal(100)) {
+  if (rateCal(60)) {
     $goodEventFlg = true;
   } else {
     $goodEventFlg = false;
   }
   // ボールイベントか体力イベントか判定:暫定20%
-  if (rateCal(0)) {
+  if (rateCal(20)) {
     $ballEventFlg = true;
   } else {
     $ballEventFlg = false;
@@ -87,9 +87,11 @@ function event() {
   } elseif ($goodEventFlg && !$ballEventFlg) {
     // 良い体力イベント発生
     debug('良い体力イベント発生');
+    return hpEvent($goodEventFlg);
   } elseif (!$goodEventFlg && !$ballEventFlg) {
     // 悪い体力イベント発生
     debug('悪い体力イベント発生');
+    return hpEvent($goodEventFlg);
   }
 }
 
@@ -122,10 +124,39 @@ function ballEvent($goodEventFlg) {
   // ボール保有数を変更
   if ($goodEventFlg) {
     $_SESSION['human']->changeBallNum($type, $changeNum);
-    History::set($balls[$type]->getName().'を'.$changeNum.'ゲットした！！');
+    History::set('目の前に何か落ちている。');
+    History::set($balls[$type]->getName().'を'.$changeNum.'個ゲットした！！');
   } else {
     $_SESSION['human']->changeBallNum($type, -$changeNum);
-    History::set($balls[$type]->getName().'を'.$changeNum.'失った！！');
+    History::set('転んでしまった。');
+    History::set($balls[$type]->getName().'を'.$changeNum.'個失った・・・');
+  }
+}
+
+// ボールイベント：何が何個増減するかを決定する
+function hpEvent($goodEventFlg) {
+  // 体力変動値を決める
+  $num = mt_rand(1,100);
+  if ((1 <= $num) && ($num < 21)) {
+    $changeHp = 10;
+  } elseif ((21 <= $num) && ($num < 51)) {
+    $changeHp = 20;
+  } elseif ((51 <= $num) && ($num < 81)) {
+    $changeHp = 30;
+  } elseif ((81 <= $num) && ($num < 96)) {
+    $changeHp = 50;
+  } else {
+    $changeHp = 100;
   }
 
+  // 体力値を変更
+  if ($goodEventFlg) {
+    $_SESSION['human']->setHp($_SESSION['human']->getHp()+$changeHp);
+    History::set('目の前に何か落ちている。');
+    History::set('エナジードリンクゲット！体力が'.$changeHp.'回復した！！');
+  } else {
+    $_SESSION['human']->setHp($_SESSION['human']->getHp()-$changeHp);
+    History::set('目の前に何か落ちている。');
+    History::set('マムシドリンクゲット！体力が'.$changeHp.'減った・・・');
+  }
 }

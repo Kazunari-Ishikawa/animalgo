@@ -34,17 +34,17 @@ if (!empty($_POST)) {
     // 進むを押した場合
     if ($nextFlg) {
       // イベント判定を行う
-      if (mt_rand(0,9)) {
+      if (!mt_rand(0,9)) {
         // イベント発生
         $eventParameter = event();
 
       // イベントが発生していない場合
-      // } else {
-      //   // エンカウントフラグON
-      //   $_SESSION['encountFlg'] = true;
-      //   // レア度を設定したが、どのようにレア別に出現させるか
-      //   $_SESSION['animal'] = $animals[mt_rand(0,3)];
-      //   History::set($_SESSION['animal']->getName().'が現れた！');
+      } else {
+        // エンカウントフラグON
+        $_SESSION['encountFlg'] = true;
+        // レア度を設定したが、どのようにレア別に出現させるか
+        $_SESSION['animal'] = $animals[mt_rand(0,3)];
+        History::set($_SESSION['animal']->getName().'が現れた！');
       }
 
     // 逃げるを押した場合
@@ -148,7 +148,7 @@ debug('SESSION:'.print_r($_SESSION, true));
                 <input type="submit" name="gameover" value="リタイア" />
               </form>
             <?php } ?>
- 
+
           </div>
           <div class="status-container">
             <div class="status">
