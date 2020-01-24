@@ -1,3 +1,25 @@
+<?php
+// クラス読み込み
+require('class.php');
+// 共通関数読み込み
+require('function.php');
+// インスタンス読み込み
+// require('instance.php');
+// セッションスタート
+session_start();
+
+debug('SESSION:'.print_r($_SESSION, true));
+
+// 捕獲ポイントを格納
+$point = (!empty($_SESSION)) ? $_SESSION['point'] : 0;
+// 捕獲したアニマルを格納
+$catch = '';
+
+// ゲーム終了としてセッションを削除
+gameOver();
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -11,9 +33,9 @@
     <section id="RESULT">
       <div class="point-container">
         <h2>あなたの捕獲ポイントは</h2>
-        <p><span class="point">400</span>点です！</p>
+        <p><span class="point"><?php echo $point; ?></span>点です！</p>
         <div class="btn">
-          <a href="index.html">トップ画面へ戻る</a>
+          <a href="index.php">トップ画面へ戻る</a>
         </div>
       </div>
       <div class="point-bottom-container">
