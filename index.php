@@ -8,8 +8,8 @@ require('instance.php');
 // セッションスタート
 session_start();
 
-// エンカウントフラグ（フラグ状態で、コマンドが変わる）
-$encountFlg = false;
+// エンカウントフラグ（フラグ状態で、表示コマンドが変わる）
+// $_SESSION['encountFlg'] = false;
 
 // ポスト送信がある場合
 if (!empty($_POST)) {
@@ -38,14 +38,13 @@ if (!empty($_POST)) {
     if ($nextFlg) {
       // イベント判定を行う
       if (!mt_rand(0,9)) {
-        // イベント
-        $eventFlg = true;
-        $eventParameter = event($eventFlg);
+        // イベント発生
+        $eventParameter = event();
 
       // イベントが発生していない場合
       } else {
-        // エンカウントフラグ
-        $encountFlg = true;
+        // エンカウントフラグON
+        $_SESSION['encountFlg'] = true;
         // レア度を設定したが、どのようにレア別に出現させるか
         $_SESSION['animal'] = $animals[mt_rand(0,3)];
       }
@@ -57,12 +56,12 @@ if (!empty($_POST)) {
         $_SESSION['animal']->attack($_SESSION['human']);
       } else {
         $_SESSION['history'] .= $_SESSION['human']->getName().'は逃げる成功！';
-
+        // 逃げる成功時、エンカウントフラグOFF
+        $_SESSION['encountFlg'] = false;
       }
 
     // ボールを投げた場合
     } elseif ($ballFlg) {
-      $encountFlg = true;
       // 選択したボール種別の判定
       if (!empty($_POST['type1'])) {
         $selectBall = $balls[0];
@@ -72,11 +71,11 @@ if (!empty($_POST)) {
         $selectBall = $balls[2];
       }
       // 捕獲判定
-      // 捕獲成功時にはエンカウントフラグをOFFにしなければならない
       if (!$_SESSION['animal']->resist($selectBall)) {
         $_SESSION['animal']->attack($_SESSION['human']);
       } else {
-        $encountFlg = false;
+        // 捕獲成功時、エンカウントフラグOFF
+        $_SESSION['encountFlg'] = false;
       };
 
     // リタイアを押した場合
@@ -114,7 +113,7 @@ if (!empty($_POST)) {
   <?php } else { ?>
     <section id="MAIN">
       <div class="main-container">
-        <?php if($encountFlg){ ?>
+        <?php if($_SESSION['encountFlg']){ ?>
           <div class="img-container">
             <img src="img/<?php echo $_SESSION['animal']->getImg(); ?>" alt="アニマル画像" />
           </div>
@@ -132,7 +131,7 @@ if (!empty($_POST)) {
         </div>
         <div class="sub-right">
           <div class="command-container">
-            <?php if($encountFlg) { ?>
+            <?php if($_SESSION['encountFlg']) { ?>
               <form action="" method="post" class="main-form">
                 <input type="hidden" name="ball" value="ボール">
                 <input type="submit" name="type1" value="ベーシックボール" />

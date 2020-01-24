@@ -29,10 +29,14 @@ function debug($str) {
 // 初期化
 //================================
 function init($name) {
+  // 履歴リセット
   History::clear();
   History::set('ゲームスタート！');
+  // 主人公生成
   createHuman();
   $_SESSION['human']->setName($name);
+  // エンカウントフラグをリセット
+  $_SESSION['encountFlg'] = false;
 }
 
 //================================
@@ -64,33 +68,31 @@ function rateCal($num) {
 //================================
 // イベント関数
 //================================
-function event($eventFlg) {
-  if ($eventFlg) {
-    // 良いイベントか悪いイベントか判定:暫定60%
-    if (rateCal(60)) {
-      $goodEventFlg = true;
-    } else {
-      $goodEventFlg = false;
-    }
-    // ボールイベントか体力イベントか判定:暫定20%
-    if (rateCal(20)) {
-      $ballEventFlg = true;
-    } else {
-      $ballEventFlg = false;
-    }
+function event() {
+  // 良いイベントか悪いイベントか判定:暫定60%
+  if (rateCal(60)) {
+    $goodEventFlg = true;
+  } else {
+    $goodEventFlg = false;
+  }
+  // ボールイベントか体力イベントか判定:暫定20%
+  if (rateCal(20)) {
+    $ballEventFlg = true;
+  } else {
+    $ballEventFlg = false;
+  }
 
-    if ($goodEventFlg && $ballEventFlg) {
-      // 良いボールイベント発生
-      debug('良いボールイベント発生');
-    } elseif (!$goodEventFlg && $ballEventFlg) {
-      // 悪いボールイベント発生
-      debug('悪いボールイベント発生');
-    } elseif ($goodEventFlg && !$ballEventFlg) {
-      // 良い体力イベント発生
-      debug('良い体力イベント発生');
-    } elseif (!$goodEventFlg && !$ballEventFlg) {
-      // 悪い体力イベント発生
-      debug('悪い体力イベント発生');
-    }
+  if ($goodEventFlg && $ballEventFlg) {
+    // 良いボールイベント発生
+    debug('良いボールイベント発生');
+  } elseif (!$goodEventFlg && $ballEventFlg) {
+    // 悪いボールイベント発生
+    debug('悪いボールイベント発生');
+  } elseif ($goodEventFlg && !$ballEventFlg) {
+    // 良い体力イベント発生
+    debug('良い体力イベント発生');
+  } elseif (!$goodEventFlg && !$ballEventFlg) {
+    // 悪い体力イベント発生
+    debug('悪い体力イベント発生');
   }
 }
