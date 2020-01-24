@@ -1,7 +1,78 @@
 <?php
 // 共通関数・クラス関数読み込み
 require('function.php');
-debug('POST:'.print_r($_POST,true));
+// インスタンス読み込み
+require('instance.php');
+session_start();
+
+$encountFlg = false;
+debug('SESSION:'.print_r($_SESSION, true));
+
+// ポスト送信がある場合
+if (!empty($_POST)) {
+  // debug('POST:'.print_r($_POST,true));
+
+  // ゲーム開始フラグ
+  $startFlg = (!empty($_POST['start'])) ? true : false;
+  // 進行フラグ
+  $nextFlg = (!empty($_POST['next'])) ? true : false;
+  // 逃げるフラグ
+  $escapeFlg = (!empty($_POST['escape'])) ? true : false;
+  // ゲームオーバーフラグ
+  $gameoverFlg = (!empty($_POST['gameover'])) ? true : false;
+  // ボールフラグ
+  $ballFlg = (!empty($_POST['ball'])) ? true : false;
+
+  // ゲーム開始時
+  if ($startFlg) {
+    // 初期化処理
+    init();
+
+  } else {
+    // ゲーム進行中
+    // 進むを押した場合
+    if ($nextFlg) {
+      // イベント判定を行う
+      if (!mt_rand(0,9)) {
+        // イベント
+        $eventFlg = true;
+        $eventParameter = event($eventFlg);
+
+        // イベントが発生していない場合
+      } else {
+        // エンカウントフラグ
+        $encountFlg = true;
+        // レア度を設定したが、どのようにレア別に出現させるか
+        $_SESSION['animal'] = $animals[mt_rand(0,3)];
+      }
+
+      // 逃げるを押した場合
+    }elseif ($escapeFlg) {
+      if (!$_SESSION['human']->escape()) {
+        debug('逃げる失敗！');
+        $_SESSION['history'] .= $_SESSION['human']->getName().'は逃げる失敗！';
+        $_SESSION['animal']->attack($_SESSION['human']);
+      } else {
+        debug('逃げる成功！');
+        $_SESSION['history'] .= $_SESSION['human']->getName().'は逃げる成功！';
+      }
+
+      // ボールを投げた場合
+    } elseif ($ballFlg) {
+      $encountFlg = true;
+
+      // 捕獲成功時にはエンカウントフラグをOFFにしなければならない
+
+      // リタイアを押した場合
+    } elseif ($gameoverFlg) {
+      // ゲームオーバーとして遷移する
+      gameOver();
+      header("Location:index.php");
+      exit();
+    }
+  }
+}
+debug('SESSION:'.print_r($_SESSION, true));
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -13,13 +84,75 @@ debug('POST:'.print_r($_POST,true));
     <title>Animal GO!!</title>
   </head>
   <body>
+  <?php if (empty($_SESSION)) { ?>
     <section id="START">
       <div  class="container">
         <h1>Animal GO!!</h1>
-        <form action="main.php" method="POST" class="start-form">
+        <form action="" method="POST" class="start-form">
           <input type="submit" name="start" value="ゲームスタート！" />
         </form>
       </div>
     </section>
+  <?php } else { ?>
+    <section id="MAIN">
+      <div class="main-container">
+        <?php if($encountFlg){ ?>
+          <div class="img-container">
+            <img src="img/<?php echo $_SESSION['animal']->getImg(); ?>" alt="アニマル画像" />
+          </div>
+        <?php } else { ?>
+          <div class="img-container">
+            <img src="img/mori_jungle.png" alt="背景" style="width: 45%;"/>
+          </div>
+          <?php } ?>
+      </div>
+      <div class="sub-container">
+        <div class="sub-left">
+          <div class="comment-container">
+            <?php if (!empty($_SESSION['history'])) echo $_SESSION['history']; ?>
+            <!-- <p>〇〇はキリンに遭遇した！</p>
+            <p>〇〇はボールを投げた！</p>
+            <p>捕まえられなかった！</p>
+            <p>キリンの反撃！</p>
+            <p>〇〇は〇〇のダメージを受けた！</p> -->
+          </div>
+        </div>
+        <div class="sub-right">
+          <div class="command-container">
+            <?php if($encountFlg) { ?>
+              <form action="" method="post" class="main-form">
+                <input type="hidden" name="ball" value="ボール">
+                <input type="submit" name="1" value="１を投げる" />
+                <input type="submit" name="2" value="２を投げる" />
+                <input type="submit" name="3" value="３を投げる" />
+              </form>
+              <form action="" method="post" class="main-form">
+                <input type="submit" name="escape" value="逃げる" />
+                <input type="submit" name="gameover" value="リタイア" />
+              </form>
+            <?php } else { ?>
+              <form action="" method="post" class="main-form">
+                <input type="submit" name="next" value="進む" />
+                <input type="submit" name="show" value="一覧をみる" />
+                <input type="submit" name="gameover" value="リタイア" />
+              </form>
+            <?php } ?>
+ 
+          </div>
+          <div class="status-container">
+            <div class="status">
+              <p><?php echo $_SESSION['human']->getName(); ?></p>
+              <p>残り体力：<?php echo $_SESSION['human']->getHp(); ?></p>
+            </div>
+            <div class="ball">
+              <p>ボール１</p>
+              <p>ボール２</p>
+              <p>ボール３</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <?php } ?>
   </body>
 </html>

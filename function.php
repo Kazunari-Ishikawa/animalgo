@@ -23,7 +23,7 @@ function debug($str) {
 // セッション準備
 //================================
 //セッションを使う
-session_start();
+// session_start();
 
 //================================
 // クラス設計
@@ -188,7 +188,7 @@ class History {
     $_SESSION['history'] .= $str.'<br>';
   }
   public static function clear() {
-    unset($_SESSION);
+    // unset($_SESSION);
     $_SESSION = array();
   }
 }
@@ -202,7 +202,7 @@ function init() {
 
 // ゲームオーバー
 function gameOver() {
-  session_destroy();
+  // session_destroy();
   $_SESSION = array();
 }
 
