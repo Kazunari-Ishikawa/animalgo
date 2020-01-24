@@ -18,8 +18,8 @@ class Human {
     $this->luck = $luck;
     $this->achieve = $achieve;
     $this->numBasic = $numBasic;
-    $this->numBasic = $numRare;
-    $this->numBasic = $numSuperRare;
+    $this->numRare = $numRare;
+    $this->numSuperRare = $numSuperRare;
   }
   // セッター
   public function setName($str) {
@@ -78,6 +78,20 @@ class Human {
     $currentAchieve = $this->getAchieve;
     $currentAchieve += $animalObj->getPoint();
     $this->setAchieve($currentAchieve);
+  }
+  // ボール保有数変更
+  public function changeBallNum($ball, $num) {
+    switch ($ball) {
+      case BASIC:
+        $this->setNumBasic($this->getNumBasic()-$num);
+        break;
+      case RARE:
+        $this->setNumRare($this->getNumRare()-$num);
+        break;
+      case SUPERRAER:
+        $this->setNumSuperRare($this->getNumSuperRare()-$num);
+        break;
+    }
   }
 }
 
@@ -162,6 +176,10 @@ class Ball {
   protected $img;
   protected $catch; // 捕獲力：暫定MAX100
   protected $rare; // レア度、出現率：MAX100
+  // 種別定数
+  const BASIC = 1;
+  const RARE = 2;
+  const SUPERRARE = 3;
   // コンストラクタ
   public function __construct($name, $img, $catch, $rare) {
     $this->name = $name;

@@ -1,10 +1,11 @@
 <?php
-// 共通関数読み込み
-require('function.php');
 // クラス読み込み
 require('class.php');
+// 共通関数読み込み
+require('function.php');
 // インスタンス読み込み
 require('instance.php');
+// セッションスタート
 session_start();
 
 $encountFlg = false;
