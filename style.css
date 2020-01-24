@@ -47,6 +47,10 @@ body {
   background: rgba(206, 112, 74, 1);
   cursor: pointer;
 }
+.set-name {
+  height: 20px;
+  margin-bottom: 20px;
+}
 
 /* メイン画面 */
 .main-container {
