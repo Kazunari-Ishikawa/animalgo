@@ -64,13 +64,13 @@ function rateCal($num) {
 //================================
 function event() {
   // 良いイベントか悪いイベントか判定:暫定60%
-  if (rateCal(60)) {
+  if (rateCal(100)) {
     $goodEventFlg = true;
   } else {
     $goodEventFlg = false;
   }
   // ボールイベントか体力イベントか判定:暫定20%
-  if (rateCal(20)) {
+  if (rateCal(0)) {
     $ballEventFlg = true;
   } else {
     $ballEventFlg = false;
@@ -79,9 +79,11 @@ function event() {
   if ($goodEventFlg && $ballEventFlg) {
     // 良いボールイベント発生
     debug('良いボールイベント発生');
+    return ballEvent($goodEventFlg);
   } elseif (!$goodEventFlg && $ballEventFlg) {
     // 悪いボールイベント発生
     debug('悪いボールイベント発生');
+    return ballEvent($goodEventFlg);
   } elseif ($goodEventFlg && !$ballEventFlg) {
     // 良い体力イベント発生
     debug('良い体力イベント発生');
@@ -89,4 +91,41 @@ function event() {
     // 悪い体力イベント発生
     debug('悪い体力イベント発生');
   }
+}
+
+// ボールイベント：何が何個増減するかを決定する
+function ballEvent($goodEventFlg) {
+  global $balls;
+  // ボール種別を決める
+  $num = mt_rand(1,100);
+  if ($num <= $balls[Ball::BASIC]->getRare()) {
+    $type = Ball::BASIC;
+  } elseif (($balls[Ball::BASIC]->getRare() < $num) && ($num <= $balls[Ball::BASIC]->getRare()+$balls[Ball::RARE]->getRare())) {
+    $type = Ball::RARE;
+  } else {
+    $type = Ball::SUPERRARE;
+  }
+
+  // 変動個数を決める
+  switch ($type) {
+    case Ball::BASIC:
+      $changeNum = mt_rand(5,8);
+      break;
+    case Ball::RARE:
+      $changeNum = mt_rand(2,4);
+      break;
+    case Ball::SUPERRARE:
+      $changeNum = 1;
+      break;
+  }
+
+  // ボール保有数を変更
+  if ($goodEventFlg) {
+    $_SESSION['human']->changeBallNum($type, $changeNum);
+    History::set($balls[$type]->getName().'を'.$changeNum.'ゲットした！！');
+  } else {
+    $_SESSION['human']->changeBallNum($type, -$changeNum);
+    History::set($balls[$type]->getName().'を'.$changeNum.'失った！！');
+  }
+
 }

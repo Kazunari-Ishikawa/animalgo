@@ -29,13 +29,13 @@ class Human {
     $this->hp = $num;
   }
   public function setNumBasic($num) {
-    $this->$numBasic = $num;
+    $this->numBasic = $num;
   }
   public function setNumRare($num) {
-    $this->$numRare = $num;
+    $this->numRare = $num;
   }
   public function setNumSuperRare($num) {
-    $this->$numSuperRare = $num;
+    $this->numSuperRare = $num;
   }
   // ゲッター
   public function getName() {
@@ -68,16 +68,16 @@ class Human {
     }
   }
   // ボール保有数変更
-  public function changeBallNum($ball, $num) {
-    switch ($ball) {
-      case BASIC:
-        $this->setNumBasic($this->getNumBasic()-$num);
+  public function changeBallNum($ballType, $num) {
+    switch ($ballType) {
+      case Ball::BASIC:
+        $this->setNumBasic($this->getNumBasic()+$num);
         break;
-      case RARE:
-        $this->setNumRare($this->getNumRare()-$num);
+      case Ball::RARE:
+        $this->setNumRare($this->getNumRare()+$num);
         break;
-      case SUPERRAER:
-        $this->setNumSuperRare($this->getNumSuperRare()-$num);
+      case Ball::SUPERRARE:
+        $this->setNumSuperRare($this->getNumSuperRare()+$num);
         break;
     }
   }

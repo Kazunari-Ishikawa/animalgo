@@ -17,6 +17,6 @@ $animals[] = new Animal('シカ', 'shika.png', 50, mt_rand(30, 50), 30, 30);
 $animals[] = new Animal('ウマ', 'uma.png', 60, mt_rand(30, 50), 30, 30);
 
 // ボール：名前、画像、捕獲力（MAX100）、レア度
-$balls[] = new Ball('ベーシック', '', 50, 70);
-$balls[] = new Ball('レア', '', 80, 28);
-$balls[] = new Ball('超レア', '', 1000, 2);
+$balls[] = new Ball('ベーシックボール', '', 50, 70);
+$balls[] = new Ball('レアボール', '', 80, 28);
+$balls[] = new Ball('スーパーレアボール', '', 1000, 2);
