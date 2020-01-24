@@ -80,8 +80,8 @@ if (!empty($_POST)) {
     // リタイアを押した場合
     } elseif ($gameoverFlg) {
       // ゲームオーバーとして遷移する
-      gameOver();
-      header("Location:index.php");
+      // gameOver();
+      header("Location:result.php");
       exit();
     }
   }

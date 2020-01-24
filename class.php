@@ -202,11 +202,13 @@ class History {
     $_SESSION = array();
   }
   public static function achieve($animalObj) {
+    if (empty($_SESSION['achieve'])) {
+      $_SESSION['achieve'] = array();
+    }
     if (empty($_SESSION['point'])) {
-      // $_SESSION['achieve'] = '';
       $_SESSION['point'] = 0;
     }
-    // $_SESSION['achieve'][0] = $animalObj->getName();
+    $_SESSION['achieve'][] = $animalObj;
     $_SESSION['point'] += $animalObj->getPoint();
   }
 }
