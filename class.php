@@ -154,15 +154,17 @@ class Animal {
   // ボールへの抵抗判定メソッド
   public function resist($ballObj) {
     // ボールの捕獲力計算
-    $catchPoint = $ballObj->catch;
+    $catchPoint = $ballObj->getCatch();
     // アニマルの抵抗力計算
     $resistPoint = $this->getResistance();
 
     // 判定・・・さらに複雑にするかは保留
     if ($catchPoint >= $resistPoint) {
       $_SESSION['history'] .= $this->name.'の捕獲成功！';
+      return true;
     } else {
       $_SESSION['history'] .= $this->name.'の捕獲失敗…';
+      return false;
     }
   }
 }

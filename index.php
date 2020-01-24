@@ -63,9 +63,21 @@ if (!empty($_POST)) {
     // ボールを投げた場合
     } elseif ($ballFlg) {
       $encountFlg = true;
+      // 選択したボール種別の判定
+      if (!empty($_POST['type1'])) {
+        $selectBall = $balls[0];
+      } elseif (!empty($_POST['type2'])) {
+        $selectBall = $balls[1];
+      } elseif (!empty($_POST['type3'])) {
+        $selectBall = $balls[2];
+      }
       // 捕獲判定
-      
       // 捕獲成功時にはエンカウントフラグをOFFにしなければならない
+      if (!$_SESSION['animal']->resist($selectBall)) {
+        $_SESSION['animal']->attack($_SESSION['human']);
+      } else {
+        $encountFlg = false;
+      };
 
     // リタイアを押した場合
     } elseif ($gameoverFlg) {
@@ -123,9 +135,9 @@ if (!empty($_POST)) {
             <?php if($encountFlg) { ?>
               <form action="" method="post" class="main-form">
                 <input type="hidden" name="ball" value="ボール">
-                <input type="submit" name="1" value="１を投げる" />
-                <input type="submit" name="2" value="２を投げる" />
-                <input type="submit" name="3" value="３を投げる" />
+                <input type="submit" name="type1" value="ベーシックボール" />
+                <input type="submit" name="type2" value="レアボール" />
+                <input type="submit" name="type3" value="スーパーレアボール" />
               </form>
               <form action="" method="post" class="main-form">
                 <input type="submit" name="escape" value="逃げる" />
