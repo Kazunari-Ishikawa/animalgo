@@ -43,7 +43,7 @@ if (!empty($_POST)) {
         // エンカウントフラグON
         $_SESSION['encountFlg'] = true;
         // レア度を設定したが、どのようにレア別に出現させるか
-        $_SESSION['animal'] = $animals[mt_rand(0,3)];
+        $_SESSION['animal'] = $animals[mt_rand(0,10)];
         History::set($_SESSION['animal']->getName().'が現れた！');
       }
 
