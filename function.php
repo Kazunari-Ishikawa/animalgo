@@ -43,6 +43,11 @@ class Human {
     $this->achieve = $achieve;
   }
   // セッター
+  public function setName($str) {
+    if ($str !== '') {
+      $this->name = $str;
+    }
+  }
   public function setHp($num) {
     $this->hp = $num;
   }
@@ -188,21 +193,20 @@ class History {
     $_SESSION['history'] .= $str.'<br>';
   }
   public static function clear() {
-    // unset($_SESSION);
     $_SESSION = array();
   }
 }
 
 // 初期化
-function init() {
+function init($name) {
   History::clear();
   History::set('ゲームスタート！');
   createHuman();
+  $_SESSION['human']->setName($name);
 }
 
 // ゲームオーバー
 function gameOver() {
-  // session_destroy();
   $_SESSION = array();
 }
 
@@ -225,13 +229,13 @@ function rateCal($num) {
 // イベント関数
 function event($eventFlg) {
   if ($eventFlg) {
-    // 良いイベントか悪いイベントか判定
+    // 良いイベントか悪いイベントか判定:暫定60%
     if (rateCal(60)) {
       $goodEventFlg = true;
     } else {
       $goodEventFlg = false;
     }
-    // ボールイベントか体力イベントか判定
+    // ボールイベントか体力イベントか判定:暫定20%
     if (rateCal(20)) {
       $ballEventFlg = true;
     } else {

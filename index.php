@@ -10,7 +10,7 @@ debug('SESSION:'.print_r($_SESSION, true));
 
 // ポスト送信がある場合
 if (!empty($_POST)) {
-  // debug('POST:'.print_r($_POST,true));
+  debug('POST:'.print_r($_POST,true));
 
   // ゲーム開始フラグ
   $startFlg = (!empty($_POST['start'])) ? true : false;
@@ -25,11 +25,13 @@ if (!empty($_POST)) {
 
   // ゲーム開始時
   if ($startFlg) {
+    // 主人公の名前
+    $name = (!empty($_POST['name'])) ? $_POST['name'] : '';
     // 初期化処理
-    init();
+    init($name);
 
+  // ゲーム進行中
   } else {
-    // ゲーム進行中
     // 進むを押した場合
     if ($nextFlg) {
       // イベント判定を行う
@@ -38,7 +40,7 @@ if (!empty($_POST)) {
         $eventFlg = true;
         $eventParameter = event($eventFlg);
 
-        // イベントが発生していない場合
+      // イベントが発生していない場合
       } else {
         // エンカウントフラグ
         $encountFlg = true;
@@ -46,24 +48,22 @@ if (!empty($_POST)) {
         $_SESSION['animal'] = $animals[mt_rand(0,3)];
       }
 
-      // 逃げるを押した場合
+    // 逃げるを押した場合
     }elseif ($escapeFlg) {
       if (!$_SESSION['human']->escape()) {
-        debug('逃げる失敗！');
         $_SESSION['history'] .= $_SESSION['human']->getName().'は逃げる失敗！';
         $_SESSION['animal']->attack($_SESSION['human']);
       } else {
-        debug('逃げる成功！');
         $_SESSION['history'] .= $_SESSION['human']->getName().'は逃げる成功！';
       }
 
-      // ボールを投げた場合
+    // ボールを投げた場合
     } elseif ($ballFlg) {
       $encountFlg = true;
 
       // 捕獲成功時にはエンカウントフラグをOFFにしなければならない
 
-      // リタイアを押した場合
+    // リタイアを押した場合
     } elseif ($gameoverFlg) {
       // ゲームオーバーとして遷移する
       gameOver();
@@ -72,7 +72,7 @@ if (!empty($_POST)) {
     }
   }
 }
-debug('SESSION:'.print_r($_SESSION, true));
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -89,6 +89,8 @@ debug('SESSION:'.print_r($_SESSION, true));
       <div  class="container">
         <h1>Animal GO!!</h1>
         <form action="" method="POST" class="start-form">
+          <p>名前</p>
+          <input type="text" name="name" class="set-name" placeholder="見習い">
           <input type="submit" name="start" value="ゲームスタート！" />
         </form>
       </div>
@@ -110,11 +112,6 @@ debug('SESSION:'.print_r($_SESSION, true));
         <div class="sub-left">
           <div class="comment-container">
             <?php if (!empty($_SESSION['history'])) echo $_SESSION['history']; ?>
-            <!-- <p>〇〇はキリンに遭遇した！</p>
-            <p>〇〇はボールを投げた！</p>
-            <p>捕まえられなかった！</p>
-            <p>キリンの反撃！</p>
-            <p>〇〇は〇〇のダメージを受けた！</p> -->
           </div>
         </div>
         <div class="sub-right">
