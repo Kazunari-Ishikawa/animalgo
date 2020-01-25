@@ -45,6 +45,7 @@ if (!empty($_POST)) {
         // レア度を設定したが、どのようにレア別に出現させるか
         $_SESSION['animal'] = $animals[mt_rand(0,10)];
         History::set($_SESSION['animal']->getName().'が現れた！');
+        History::set('どのボールを投げる？');
       }
 
     // 逃げるを押した場合

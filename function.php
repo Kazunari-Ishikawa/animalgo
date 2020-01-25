@@ -25,7 +25,7 @@ function debug($str) {
 function init($name) {
   // 履歴リセット
   History::clear();
-  History::set('ゲームスタート！');
+  History::set('ゲームスタート！<br>アニマルに遭遇したら、ボールを投げてつかまえよう！');
   // 主人公生成
   createHuman();
   $_SESSION['human']->setName($name);
@@ -80,8 +80,8 @@ function rateCal($num) {
 // イベント関数
 //================================
 function event() {
-  // 良いイベントか悪いイベントか判定:暫定66%
-  if (rateCal(66)) {
+  // 良いイベントか悪いイベントか判定:暫定60%
+  if (rateCal(60)) {
     $goodEventFlg = true;
   } else {
     $goodEventFlg = false;
