@@ -76,12 +76,12 @@ body {
   width: 50%;
 }
 .comment-container {
-  padding: 20px;
+  padding: 10px;
   border: 3px solid rgba(206, 112, 74, 1);
   border-radius: 10px;
 }
 .command-container {
-  padding: 20px;
+  padding: 10px;
   border: 3px solid rgba(206, 112, 74, 1);
   border-radius: 10px;
 }
@@ -91,7 +91,7 @@ body {
 }
 .main-form input[type="submit"] {
   background: #f09d00;
-  width: 100px;
+  width: 160px;
   box-sizing: border-box;
   border: none;
   display: block;
@@ -111,23 +111,22 @@ body {
 }
 .status-container {
   margin-top: 20px;
-  padding: 20px;
+  padding: 10px;
   border: 3px solid rgba(206, 112, 74, 1);
   border-radius: 10px;
   overflow: hidden;
 }
-.status,
-.ball {
-  overflow: hidden;
-  text-align: center;
-}
-.status p {
+.status-table {
   float: left;
-  width: 40%;
 }
-.ball p {
-  float: left;
-  width: 30%;
+.status-table td {
+  margin-right: 20px;
+}
+.ball-table {
+  float: right;
+}
+.non-bottom {
+  margin-bottom: 0 !important;
 }
 
 /* 結果画面 */

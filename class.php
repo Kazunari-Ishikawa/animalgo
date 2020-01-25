@@ -7,15 +7,15 @@ class Human {
   protected $name;
   protected $hp;
   protected $luck; //逃げる確率：MAX100
-  protected $numBasic; //ベーシックボールの保有数
+  protected $numNormal; //ノーマルボールの保有数
   protected $numRare; //レアボールの保有数
   protected $numSuperRare; //スーパーレアボールの保有数
   // コンストラクタ
-  public function __construct($name, $hp, $luck, $numBasic, $numRare, $numSuperRare) {
+  public function __construct($name, $hp, $luck, $numNormal, $numRare, $numSuperRare) {
     $this->name = $name;
     $this->hp = $hp;
     $this->luck = $luck;
-    $this->numBasic = $numBasic;
+    $this->numNormal = $numNormal;
     $this->numRare = $numRare;
     $this->numSuperRare = $numSuperRare;
   }
@@ -28,8 +28,8 @@ class Human {
   public function setHp($num) {
     $this->hp = $num;
   }
-  public function setNumBasic($num) {
-    $this->numBasic = $num;
+  public function setNumNormal($num) {
+    $this->numNormal = $num;
   }
   public function setNumRare($num) {
     $this->numRare = $num;
@@ -47,9 +47,9 @@ class Human {
   public function getLuck() {
     return $this->luck;
   }
-  public function getNumBasic() {
-    if ($this->numBasic > 0) {
-      return $this->numBasic;
+  public function getNumNormal() {
+    if ($this->numNormal > 0) {
+      return $this->numNormal;
     } else {
       return 0;
     }
@@ -82,8 +82,8 @@ class Human {
   // ボール保有数変更
   public function changeBallNum($ballType, $num) {
     switch ($ballType) {
-      case Ball::BASIC:
-        $this->setNumBasic($this->getNumBasic()+$num);
+      case Ball::Normal:
+        $this->setNumNormal($this->getNumNormal()+$num);
         break;
       case Ball::RARE:
         $this->setNumRare($this->getNumRare()+$num);
@@ -181,7 +181,7 @@ class Ball {
   protected $catch; // 捕獲力：暫定MAX100
   protected $rare; // レア度、出現率：MAX100
   // 種別定数
-  const BASIC = 0;
+  const Normal = 0;
   const RARE = 1;
   const SUPERRARE = 2;
   // コンストラクタ

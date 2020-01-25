@@ -45,7 +45,7 @@ function gameOver($humanObj) {
     $gameOverFlg = true;
   }
   // ボール数の判定
-  if (($humanObj->getNumBasic() <= 0) && ($humanObj->getNumRare() <= 0) && ($humanObj->getNumSuperRare() <= 0) ) {
+  if (($humanObj->getNumNormal() <= 0) && ($humanObj->getNumRare() <= 0) && ($humanObj->getNumSuperRare() <= 0) ) {
     History::set('ボールが無くなったので帰るしかない…');
     $_SESSION['gameover'] = 'ボールが無くなったので帰るしかない…';
     $gameOverFlg = true;
@@ -117,9 +117,9 @@ function ballEvent($goodEventFlg) {
   global $balls;
   // ボール種別を決める
   $num = mt_rand(1,100);
-  if ($num <= $balls[Ball::BASIC]->getRare()) {
-    $type = Ball::BASIC;
-  } elseif (($balls[Ball::BASIC]->getRare() < $num) && ($num <= $balls[Ball::BASIC]->getRare()+$balls[Ball::RARE]->getRare())) {
+  if ($num <= $balls[Ball::Normal]->getRare()) {
+    $type = Ball::Normal;
+  } elseif (($balls[Ball::Normal]->getRare() < $num) && ($num <= $balls[Ball::Normal]->getRare()+$balls[Ball::RARE]->getRare())) {
     $type = Ball::RARE;
   } else {
     $type = Ball::SUPERRARE;
@@ -127,7 +127,7 @@ function ballEvent($goodEventFlg) {
 
   // 変動個数を決める
   switch ($type) {
-    case Ball::BASIC:
+    case Ball::Normal:
       $changeNum = mt_rand(5,8);
       break;
     case Ball::RARE:
