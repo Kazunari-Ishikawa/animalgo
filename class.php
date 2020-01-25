@@ -9,15 +9,15 @@ class Human {
   protected $luck; //逃げる確率：MAX100
   protected $numNormal; //ノーマルボールの保有数
   protected $numRare; //レアボールの保有数
-  protected $numSuperRare; //スーパーレアボールの保有数
+  protected $numUltra; //ウルトラボールの保有数
   // コンストラクタ
-  public function __construct($name, $hp, $luck, $numNormal, $numRare, $numSuperRare) {
+  public function __construct($name, $hp, $luck, $numNormal, $numRare, $numUltra) {
     $this->name = $name;
     $this->hp = $hp;
     $this->luck = $luck;
     $this->numNormal = $numNormal;
     $this->numRare = $numRare;
-    $this->numSuperRare = $numSuperRare;
+    $this->numUltra = $numUltra;
   }
   // セッター
   public function setName($str) {
@@ -34,8 +34,8 @@ class Human {
   public function setNumRare($num) {
     $this->numRare = $num;
   }
-  public function setNumSuperRare($num) {
-    $this->numSuperRare = $num;
+  public function setNumUltra($num) {
+    $this->numUltra = $num;
   }
   // ゲッター
   public function getName() {
@@ -61,9 +61,9 @@ class Human {
       return 0;
     }
   }
-  public function getNumSuperRare() {
-    if ($this->numSuperRare > 0) {
-      return $this->numSuperRare;
+  public function getNumUltra() {
+    if ($this->numUltra > 0) {
+      return $this->numUltra;
     } else {
       return 0;
     }
@@ -82,14 +82,14 @@ class Human {
   // ボール保有数変更
   public function changeBallNum($ballType, $num) {
     switch ($ballType) {
-      case Ball::Normal:
+      case Ball::NORMAL:
         $this->setNumNormal($this->getNumNormal()+$num);
         break;
       case Ball::RARE:
         $this->setNumRare($this->getNumRare()+$num);
         break;
-      case Ball::SUPERRARE:
-        $this->setNumSuperRare($this->getNumSuperRare()+$num);
+      case Ball::ULTRA:
+        $this->setNumUltra($this->getNumUltra()+$num);
         break;
     }
   }
@@ -181,9 +181,9 @@ class Ball {
   protected $catch; // 捕獲力：暫定MAX100
   protected $rare; // レア度、出現率：MAX100
   // 種別定数
-  const Normal = 0;
+  const NORMAL = 0;
   const RARE = 1;
-  const SUPERRARE = 2;
+  const ULTRA = 2;
   // コンストラクタ
   public function __construct($name, $img, $catch, $rare) {
     $this->name = $name;

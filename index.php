@@ -61,13 +61,13 @@ if (!empty($_POST)) {
       // 選択したボール種別の判定
       if (!empty($_POST['type0'])) {
         $selectBall = $balls[0];
-        $type = Ball::Normal;
+        $type = Ball::NORMAL;
       } elseif (!empty($_POST['type1'])) {
         $selectBall = $balls[1];
         $type = Ball::RARE;
       } elseif (!empty($_POST['type2'])) {
         $selectBall = $balls[2];
-        $type = Ball::SUPERRARE;
+        $type = Ball::ULTRA;
       }
       // ボール消費
       History::set($selectBall->getName().'を投げた！');
@@ -143,13 +143,13 @@ debug('SESSION:'.print_r($_SESSION, true));
               <form action="" method="post" class="main-form">
                 <input type="hidden" name="ball" value="ボール">
                 <?php if ($_SESSION['human']->getNumNormal() > 0): ?>
-                  <input type="submit" name="type0" value="ベーシックボール" />
+                  <input type="submit" name="type0" value="<?php echo $balls[0]->getName(); ?>" />
                 <?php endif; ?>
                 <?php if ($_SESSION['human']->getNumRare() > 0): ?>
-                  <input type="submit" name="type1" value="レアボール" />
+                  <input type="submit" name="type1" value="<?php echo $balls[1]->getName(); ?>" />
                 <?php endif; ?>
-                <?php if ($_SESSION['human']->getNumSuperRare() > 0): ?>
-                  <input type="submit" name="type2" value="スーパーレアボール" />
+                <?php if ($_SESSION['human']->getNumUltra() > 0): ?>
+                  <input type="submit" name="type2" value="<?php echo $balls[2]->getName(); ?>" />
                 <?php endif; ?>
               </form>
               <form action="" method="post" class="main-form">
@@ -168,15 +168,15 @@ debug('SESSION:'.print_r($_SESSION, true));
           <div class="status-container">
             <table class="status-table">
               <tbody>
-                <tr><td>名前</td><td><?php echo $_SESSION['human']->getName(); ?></td></tr>
-                <tr><td>体力</td><td><?php echo $_SESSION['human']->getHp(); ?></td></tr>
+                <tr><td>名前　</td><td><?php echo $_SESSION['human']->getName(); ?></td></tr>
+                <tr><td>体力　</td><td><?php echo $_SESSION['human']->getHp(); ?></td></tr>
                 </tbody>
             </table>
             <table class="ball-table">
               <tbody>
-                <tr><td>ノーマルボール</td><td>×<?php echo $_SESSION['human']->getNumNormal(); ?></td></tr>
-                <tr><td>レアボール</td><td>×<?php echo $_SESSION['human']->getNumRare(); ?></td></tr>
-                <tr><td>ウルトラボール</td><td>×<?php echo $_SESSION['human']->getNumSuperRare(); ?></td></tr>
+                <tr><td><?php echo $balls[0]->getName(); ?></td><td>×<?php echo $_SESSION['human']->getNumNormal(); ?>　</td></tr>
+                <tr><td><?php echo $balls[1]->getName(); ?></td><td>×<?php echo $_SESSION['human']->getNumRare(); ?>　</td></tr>
+                <tr><td><?php echo $balls[2]->getName(); ?></td><td>×<?php echo $_SESSION['human']->getNumUltra(); ?>　</td></tr>
               </tbody>
             </table>
           </div>
