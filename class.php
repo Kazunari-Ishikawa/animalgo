@@ -48,22 +48,34 @@ class Human {
     return $this->luck;
   }
   public function getNumBasic() {
-    return $this->numBasic;
+    if ($this->numBasic > 0) {
+      return $this->numBasic;
+    } else {
+      return 0;
+    }
   }
   public function getNumRare() {
-    return $this->numRare;
+    if ($this->numRare > 0) {
+      return $this->numRare;
+    } else {
+      return 0;
+    }
   }
   public function getNumSuperRare() {
-    return $this->numSuperRare;
+    if ($this->numSuperRare > 0) {
+      return $this->numSuperRare;
+    } else {
+      return 0;
+    }
   }
   // メソッド
   // 逃げるメソッド
   public function escape() {
     if (rateCal($this->luck)) {
-      History::set($this->name.'は逃げる成功！');
+      History::set($this->name.'は逃げた！');
       return true;
     } else {
-      History::set($this->name.'は逃げる失敗！');
+      History::set($this->name.'は逃げられなかった！');
       return false;
     }
   }
@@ -134,18 +146,22 @@ class Animal {
     $attackMax = $this->attack + 10;
     $attackPoint = (int)mt_rand($attackMin, $attackMax);
     $humanObj->setHp($humanObj->getHp()-$attackPoint);
-    History::set($this->name.'から反撃を受けた！');
-    History::set($attackPoint.'のダメージ！');
+    History::set($this->name.'から反撃を受けた！'.$attackPoint.'のダメージ！');
   }
   // ボールへの抵抗判定メソッド
   public function resist($ballObj) {
     // ボールの捕獲力計算
-    $catchPoint = $ballObj->getCatch();
+    $catchPointMin = $ballObj->getCatch() - 10;
+    $catchPointMax = $ballObj->getCatch() + 10;
+    $catchPoint = (int)mt_rand($catchPointMin, $catchPointMax);
     // アニマルの抵抗力計算
-    $resistPoint = $this->getResistance();
-
-    // 判定・・・さらに複雑にするかは保留
-    if ($catchPoint >= $resistPoint) {
+    $resistPointMin = $this->getResistance() - 10;
+    $resistPointMax = $this->getResistance() + 10;
+    $resistPoint = (int)mt_rand($resistPointMin, $resistPointMax);
+    // 捕獲確率
+    $catchRate = $catchPoint - $resistPoint;
+    // 判定
+    if (rateCal($catchRate)) {
       History::set($this->name.'の捕獲成功！');
       return true;
     } else {
