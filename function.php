@@ -40,14 +40,14 @@ function gameOver($humanObj) {
   $gameOverFlg = false;
   // 体力値の判定
   if ($humanObj->getHp() <= 0) {
-    History::set('体力がなくなり力尽きた・・・');
-    $_SESSION['gameover'] = $humanObj->getName().'は体力がなくなり力尽きた・・・';
+    History::set('体力がなくなり力尽きた…');
+    $_SESSION['gameover'] = $humanObj->getName().'は体力がなくなり力尽きた…';
     $gameOverFlg = true;
   }
   // ボール数の判定
   if (($humanObj->getNumBasic() <= 0) && ($humanObj->getNumRare() <= 0) && ($humanObj->getNumSuperRare() <= 0) ) {
-    History::set('ボールが無くなったので帰るしかない・・・');
-    $_SESSION['gameover'] = 'ボールが無くなったので帰るしかない・・・';
+    History::set('ボールが無くなったので帰るしかない…');
+    $_SESSION['gameover'] = 'ボールが無くなったので帰るしかない…';
     $gameOverFlg = true;
   }
 
@@ -80,8 +80,8 @@ function rateCal($num) {
 // イベント関数
 //================================
 function event() {
-  // 良いイベントか悪いイベントか判定:暫定60%
-  if (rateCal(60)) {
+  // 良いイベントか悪いイベントか判定:暫定66%
+  if (rateCal(66)) {
     $goodEventFlg = true;
   } else {
     $goodEventFlg = false;
@@ -141,12 +141,10 @@ function ballEvent($goodEventFlg) {
   // ボール保有数を変更
   if ($goodEventFlg) {
     $_SESSION['human']->changeBallNum($type, $changeNum);
-    History::set('目の前に何か落ちている。');
-    History::set($balls[$type]->getName().'を'.$changeNum.'個ゲットした！！');
+    History::set('目の前に何か落ちている。'.$balls[$type]->getName().'を'.$changeNum.'個ゲットした！！');
   } else {
     $_SESSION['human']->changeBallNum($type, -$changeNum);
-    History::set('転んでしまった。');
-    History::set($balls[$type]->getName().'を'.$changeNum.'個失った・・・');
+    History::set('転んでしまった。'.$balls[$type]->getName().'を'.$changeNum.'個失った…');
   }
 }
 
@@ -169,11 +167,9 @@ function hpEvent($goodEventFlg) {
   // 体力値を変更
   if ($goodEventFlg) {
     $_SESSION['human']->setHp($_SESSION['human']->getHp()+$changeHp);
-    History::set('目の前に何か落ちている。');
-    History::set('エナジードリンクゲット！体力が'.$changeHp.'回復した！！');
+    History::set('目の前に何か落ちている。エナジードリンクゲット！体力が'.$changeHp.'回復した！！');
   } else {
     $_SESSION['human']->setHp($_SESSION['human']->getHp()-$changeHp);
-    History::set('目の前に何か落ちている。');
-    History::set('マムシドリンクゲット！体力が'.$changeHp.'減った・・・');
+    History::set('目の前に何か落ちている。マムシドリンクゲット！体力が'.$changeHp.'減った…');
   }
 }

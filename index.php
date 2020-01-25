@@ -70,6 +70,7 @@ if (!empty($_POST)) {
         $type = Ball::SUPERRARE;
       }
       // ボール消費
+      History::set($selectBall->getName().'を投げた！');
       $_SESSION['human']->changeBallNum($type, -1);
 
       // 捕獲判定

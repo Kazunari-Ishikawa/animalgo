@@ -48,22 +48,34 @@ class Human {
     return $this->luck;
   }
   public function getNumBasic() {
-    return $this->numBasic;
+    if ($this->numBasic > 0) {
+      return $this->numBasic;
+    } else {
+      return 0;
+    }
   }
   public function getNumRare() {
-    return $this->numRare;
+    if ($this->numRare > 0) {
+      return $this->numRare;
+    } else {
+      return 0;
+    }
   }
   public function getNumSuperRare() {
-    return $this->numSuperRare;
+    if ($this->numSuperRare > 0) {
+      return $this->numSuperRare;
+    } else {
+      return 0;
+    }
   }
   // メソッド
   // 逃げるメソッド
   public function escape() {
     if (rateCal($this->luck)) {
-      History::set($this->name.'は逃げる成功！');
+      History::set($this->name.'は逃げた！');
       return true;
     } else {
-      History::set($this->name.'は逃げる失敗！');
+      History::set($this->name.'は逃げられなかった！');
       return false;
     }
   }
