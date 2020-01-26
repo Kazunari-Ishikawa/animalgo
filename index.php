@@ -105,16 +105,17 @@ debug('SESSION:'.print_r($_SESSION, true));
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="style.css" />
-    <title>Animal GO!!</title>
+    <title>Animal GO！</title>
   </head>
   <body>
   <?php if (empty($_SESSION)) { ?>
     <section id="START">
       <div  class="container">
-        <h1>Animal GO!!</h1>
+        <h1>Animal GO！</h1>
+        <p>アニマルをたくさんつかまえよう！！</p>
         <form action="" method="POST" class="start-form">
           <p>名前</p>
-          <input type="text" name="name" class="set-name" placeholder="見習い">
+          <input type="text" name="name" class="set-name" placeholder="<?php echo $human->getName(); ?>">
           <input type="submit" name="start" value="ゲームスタート！" />
         </form>
       </div>
@@ -163,7 +164,6 @@ debug('SESSION:'.print_r($_SESSION, true));
             <?php } else { ?>
               <form action="" method="post" class="main-form">
                 <input type="submit" name="next" value="進む" class="non-bottom" />
-                <!-- <input type="submit" name="show" value="一覧をみる"class="non-bottom" /> -->
                 <input type="submit" name="gameover" value="リタイア" class="non-bottom" />
               </form>
             <?php } ?>

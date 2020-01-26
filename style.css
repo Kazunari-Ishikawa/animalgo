@@ -30,9 +30,10 @@ body {
 }
 #START h1 {
   text-align: center;
+  margin-bottom: 30px;
 }
 .start-form {
-  margin: 30px;
+  margin: 20px;
   text-align: center;
 }
 .start-form input[type="submit"] {
