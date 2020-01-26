@@ -25,7 +25,7 @@ function debug($str) {
 function init($name) {
   // 履歴リセット
   History::clear();
-  History::set('ゲームスタート！<br>アニマルに遭遇したら、ボールを投げてつかまえよう！');
+  History::set('ゲームスタート！アニマルに出会ったらボールを投げてつかまえよう！<br>レア度の高いボールほど捕まえる確率が高くなる！');
   // 主人公生成
   createHuman();
   $_SESSION['human']->setName($name);

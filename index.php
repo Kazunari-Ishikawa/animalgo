@@ -135,7 +135,10 @@ debug('SESSION:'.print_r($_SESSION, true));
       <div class="sub-container">
         <div class="sub-left">
           <div class="comment-container">
-            <?php if (!empty($_SESSION['history'])) echo $_SESSION['history']; ?>
+            <?php
+              if (!empty($_SESSION['history'])) echo $_SESSION['history'];
+              History::unset();
+            ?>
           </div>
         </div>
         <div class="sub-right">

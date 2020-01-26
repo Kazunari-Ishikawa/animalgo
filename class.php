@@ -214,6 +214,9 @@ class History {
     if (empty($_SESSION['history'])) $_SESSION['history'] = '';
     $_SESSION['history'] .= $str.'<br>';
   }
+  public static function unset() {
+    $_SESSION['history'] = '';
+  }
   public static function clear() {
     $_SESSION = array();
   }
