@@ -5,7 +5,7 @@
 
 ## 公開URL
 
-https://kazuishikawa.xsrv.jp/
+https://kazuishikawa.xsrv.jp/animal  
 
 
 ## 制作時間
